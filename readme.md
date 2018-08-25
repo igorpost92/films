@@ -1,4 +1,5 @@
-Задание 6:
+[http://omdb-films.surge.sh/](http://omdb-films.surge.sh/)
+
 Реализовать список фильмов на основании API - http://www.omdbapi.com/ (Или любого другого открытого).
 
 С возможностью:  
