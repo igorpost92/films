@@ -3,13 +3,12 @@ import { handleActions } from 'redux-actions';
 import * as actions from './actions';
 
 const initSearchBar = {
-  titleInput: '',
-  status: '',
+  titleInput: 'taxi',
+  searchButtonStatus: 'default',
 };
 
 const initialFilters = {
-  useFilterByYear: false,
-  filterByYear: '',
+  filterByMovieType: {},
   sortByField: 'Title',
 };
 
@@ -18,8 +17,16 @@ export const searchBar = handleActions({
     return { ...state, titleInput };
   },
 
+  [actions.fetchDataRequest](state) {
+    return { ...state, searchButtonStatus: 'processing' };
+  },
+
   [actions.fetchDataSuccess](state) {
-    return { ...state, status: 'success' };
+    return { ...state, searchButtonStatus: 'default' };
+  },
+
+  [actions.fetchDataFailure](state) {
+    return { ...state, searchButtonStatus: 'error' };
   },
 }, initSearchBar);
 
@@ -30,10 +37,16 @@ export const data = handleActions({
 }, []);
 
 export const filters = handleActions({
-  // [actions.setFilter](state, { payload: { value } }) {
-  //   return { ...state, ...value };
-  // },
-  [actions.sort](state, { payload: { sortByField } }) {
+  [actions.setFilter](state, { payload }) {
+    return {
+      ...state,
+      filterByMovieType: {
+        ...state.filterByMovieType,
+        [payload.value]: payload.checked,
+      },
+    };
+  },
+  [actions.sortBy](state, { payload: { sortByField } }) {
     return { ...state, sortByField };
   },
 }, initialFilters);

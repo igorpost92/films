@@ -3,9 +3,10 @@
   padding: 0;
 }
 
+/* why inputs doesn't inherit from body? */
 * {
   font-family: "-apple-system", BlinkMacSystemFont, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.56;
 }
 
@@ -14,45 +15,65 @@
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr 5fr;
-  grid-column-gap: 20px;
+  grid-gap: 20px;
 }
 
 .search-bar {
   grid-column: 1 / span 2;
-  padding: 10px;
   text-align: center;
 }
 
 .search-bar__title {
-  margin: 0 10px;
+  margin: 0 20px;
   padding: 10px;
   border-radius: 5px;
-  width: 70%;
+  width: 73%;
 }
 
 .search-bar__button {
-  padding: 10px 20px;
+  padding: 10px 40px;
+  width: 75px;
+  box-sizing: content-box;
   background: lightblue;
   border-radius: 5px;
   outline: none;
 }
 
-.film {
-  border: 1px solid black;
+.filters {
+  border: 1px solid lightgray;
   border-radius: 5px;
-  margin: 10px;
+  padding: 10px;
 }
 
-.film::after {
-  clear: both;
-  content: '';
-  display: block;
+.filters fieldset * {
+  margin: 3px 5px;
+}
+
+.filters fieldset legend {
+  font-weight: bold;
+}
+
+.filters fieldset {
+  margin-bottom: 20px;
+}
+
+.films {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(5, 250px);
+}
+
+.film {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .film__poster img {
-  margin: 0 10px 0 0;
+  display: block;
+  margin: 0 auto;
+  width: 140px;
   height: 200px;
-  float: left;
 }
 
 .film__info {

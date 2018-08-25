@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 
 import Filters from '../components/Filters';
-import * as actionCreators from '../actions';
+import { setFilter, sortBy } from '../actions';
 
 const sorters = ['Title', 'Year'];
+const movieTypes = ['movie', 'series', 'episode'];
 
 const mapStateToProps = (state) => {
-  const { useFilterByYear, filterByYear, sortByField } = state.filters;
+  const { sortByField, filterByMovieType } = state.filters;
   return {
-    useFilterByYear, filterByYear, sortByField, sorters,
+    sortByField, sorters, filterByMovieType, movieTypes,
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(Filters);
+export default connect(mapStateToProps, { setFilter, sortBy })(Filters);

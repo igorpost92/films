@@ -1,29 +1,47 @@
 import React from 'react';
 
 export default class Filters extends React.Component {
-  changeSorter = ({ target }) => {
-    this.props.sort({ sortByField: target.value });
+  sortBy = ({ target }) => {
+    this.props.sortBy(target.value);
   };
 
-  // renderFilters = () => (
-  //   <fieldset>
-  //     <legend>Show only:</legend>
-  //     <div>
-  //       <input type="checkbox" id={id} name="filter-by" value="all" onChange={this.changeSorter} checked={checked} />
-  //       <label htmlFor={id}>{s}</label>
-  //     </div>
-  //   </fieldset>
-  // );
+  setFilter = ({ target }) => {
+    const { value, checked } = target;
+    this.props.setFilter({ value, checked });
+  };
+
+  renderFilters = () => {
+    const { filterByMovieType, movieTypes } = this.props;
+
+    const items = movieTypes.map((type) => {
+      const isFilterSet = filterByMovieType[type] || false;
+      const id = `filter-type-${type}`;
+
+      return (
+        <div key={id}>
+          <input type="checkbox" id={id} name="filter-type" value={type} onChange={this.setFilter} checked={isFilterSet} />
+          <label htmlFor={id}>{type}</label>
+        </div>
+      );
+    });
+
+    return (
+      <fieldset>
+        <legend>Show only:</legend>
+        {items}
+      </fieldset>
+    );
+  };
 
   renderSortBy = () => {
-    const { sorters } = this.props;
+    const { sortByField, sorters } = this.props;
 
     const items = sorters.map((s) => {
       const id = `sort-by-${s}`;
-      const checked = this.props.sortByField === s;
+      const checked = sortByField === s;
       return (
-        <div>
-          <input type="radio" id={id} name="sort-by" value={s} onChange={this.changeSorter} checked={checked} />
+        <div key={id}>
+          <input type="radio" id={id} name="sort-by" value={s} onChange={this.sortBy} checked={checked} />
           <label htmlFor={id}>{s}</label>
         </div>
       );
@@ -40,6 +58,7 @@ export default class Filters extends React.Component {
   render() {
     return (
       <div className="filters">
+        {this.renderFilters()}
         {this.renderSortBy()}
       </div>
     );

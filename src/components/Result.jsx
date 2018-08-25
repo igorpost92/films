@@ -19,7 +19,7 @@ export default class Result extends React.Component {
     const items = data.map(film => (
       <div key={film.imdbID} className="film">
         <div className="film__poster">
-          <img src={film.Poster} alt="poster" />
+          <img src={film.Poster} alt={film.Title} title={film.Title} />
         </div>
         <div className="film__info">
           <span className="film__info-label">Title: </span>
