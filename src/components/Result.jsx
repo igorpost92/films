@@ -1,4 +1,5 @@
 import React from 'react';
+import FilmCard from './FilmCard';
 
 export default class Result extends React.Component {
   handleInput = ({ target }) => {
@@ -17,23 +18,7 @@ export default class Result extends React.Component {
     }
 
     const items = data.map(film => (
-      <div key={film.imdbID} className="film">
-        <div className="film__poster">
-          <img src={film.Poster} alt={film.Title} title={film.Title} />
-        </div>
-        <div className="film__info">
-          <span className="film__info-label">Title: </span>
-          {film.Title}
-        </div>
-        <div className="film__info">
-          <span className="film__info-label">Year: </span>
-          {film.Year}
-        </div>
-        <div className="film__info">
-          <span className="film__info-label">Type: </span>
-          {film.Type}
-        </div>
-      </div>
+      <FilmCard key={film.imdbID} data={film} showDetails={this.props.showDetails} />
     ));
     return items;
   };

@@ -10,6 +10,10 @@
   line-height: 1.56;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 .wrapper {
   margin: 20px;
   display: grid;
@@ -68,6 +72,11 @@
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 10px;
+  cursor: pointer;
+}
+
+.film:hover {
+  background: rgb(187, 238, 255);
 }
 
 .film__poster img {
@@ -89,6 +98,65 @@ fieldset {
   display: flex;
   flex-direction: column;
   border: none;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: gray;
+  opacity: 0.6;
+  z-index: 980;
+}
+
+.movie-details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 10px;
+  background: white;
+  margin: 20px auto;
+  max-width: 600px;
+  min-height: 400px;
+  padding: 10px 20px;
+  z-index: 999;
+}
+
+.movie-details__title,
+.movie-details__plot {
+  grid-column: 1 / span 2;
+}
+
+.movie-details__title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.movie-details__info {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 5px 10px;
+}
+
+.movie-details__info-label {
+  color: #f60;
+  text-transform: lowercase;
+}
+
+.movie-details__poster img {
+  max-height: 300px;
+  float: left;
+}
+
+.movie-details__plot {
+  padding: 20px 10px 10px;
 }
 
 @media only screen and (max-width: 1050px) {

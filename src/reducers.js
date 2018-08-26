@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 
 import * as actions from './actions';
 
-const initSearchBar = {
+const initialSearchBar = {
   titleInput: '',
   searchButtonStatus: 'default',
 };
@@ -10,6 +10,12 @@ const initSearchBar = {
 const initialFilters = {
   filterByMovieType: {},
   sortByField: 'Title',
+};
+
+const initialMovieDetails = {
+  isModalShown: false,
+  status: '',
+  details: {},
 };
 
 export const searchBar = handleActions({
@@ -28,13 +34,15 @@ export const searchBar = handleActions({
   [actions.fetchDataFailure](state) {
     return { ...state, searchButtonStatus: 'error' };
   },
-}, initSearchBar);
+}, initialSearchBar);
+
 
 export const data = handleActions({
   [actions.fetchDataSuccess](state, { payload }) {
     return payload.data;
   },
 }, []);
+
 
 export const filters = handleActions({
   [actions.setFilter](state, { payload }) {
@@ -50,3 +58,24 @@ export const filters = handleActions({
     return { ...state, sortByField };
   },
 }, initialFilters);
+
+
+export const movieDetails = handleActions({
+  [actions.fetchDetailsRequest](state) {
+    return { ...state, status: 'processing', isModalShown: true };
+  },
+
+  [actions.fetchDetailsSuccess](state, { payload: { details } }) {
+    return { ...state, status: 'success', details };
+  },
+
+  [actions.fetchDetailsFailure](state) {
+    return { ...state, status: 'error' };
+  },
+
+  [actions.closeDetails](state) {
+    return {
+      ...state, isModalShown: false, status: '', details: {},
+    };
+  },
+}, initialMovieDetails);
