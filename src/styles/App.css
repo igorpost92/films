@@ -14,7 +14,7 @@
   margin: 20px;
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: minmax(max-content, 1fr) 5fr;
   grid-gap: 20px;
 }
 
@@ -24,6 +24,7 @@
 }
 
 .search-bar__title {
+  box-sizing: border-box;
   margin: 0 20px;
   padding: 10px;
   border-radius: 5px;
@@ -60,7 +61,7 @@
 .films {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(5, 250px);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .film {
@@ -88,4 +89,43 @@ fieldset {
   display: flex;
   flex-direction: column;
   border: none;
+}
+
+@media only screen and (max-width: 1050px) {
+  .films {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 860px) {
+  .films {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .search-bar__button {
+    padding: 10px 20px;
+    width: auto;
+  } 
+}
+
+@media only screen and (max-width: 685px) {
+  .films {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 515px) {
+  .search-bar__title {
+    width: auto;
+  }
+
+  .wrapper {
+    margin: 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .search-bar {
+    grid-column: auto;
+    text-align: center;
+  }
 }
